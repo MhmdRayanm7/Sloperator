@@ -174,7 +174,7 @@ class Interpreter:
             case TokenType.STAR:
                 return left * right
             case TokenType.SLASH:
-                return left // right
+                return self.divide(left, right)
             case TokenType.LESS:
                 return left < right
             case TokenType.LESS_EQUAL:
@@ -196,6 +196,15 @@ class Interpreter:
             f"operands of '{operator.lexeme}' must both be numbers or both be strings, "
             f"got {type_name(left)} and {type_name(right)}",
         )
+
+    def divide(self, left: int, right: int) -> int:
+        # SlopLang truncates toward zero; Python's // floors, which rounds
+        # away from zero for negative quotients. Divide magnitudes and
+        # reapply the sign so arbitrary-precision integers stay exact.
+        quotient = abs(left) // abs(right)
+        if (left < 0) != (right < 0):
+            return -quotient
+        return quotient
 
     def call(self, function: Value, arguments: list[Value], paren: Token) -> Value:
         if isinstance(function, Builtin):
