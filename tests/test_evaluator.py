@@ -32,6 +32,22 @@ def test_arithmetic(expression: str, expected: str):
 @pytest.mark.parametrize(
     ("expression", "expected"),
     [
+        ("-7 / 2", "-3"),  # truncates toward zero, not floor division's -4
+        ("7 / -2", "-3"),
+        ("-7 / -2", "3"),
+        ("-6 / 2", "-3"),
+        ("-1 / 2", "0"),
+        ("1 / -2", "0"),
+        ("-9223372036854775808 / 3", "-3074457345618258602"),  # stays exact, not float
+    ],
+)
+def test_division_truncates_toward_zero(expression: str, expected: str):
+    assert run(f"hallucinate({expression})✨") == f"{expected}\n"
+
+
+@pytest.mark.parametrize(
+    ("expression", "expected"),
+    [
         ("1 == 1", "✅"),
         ("✅ == 1", "❌"),  # Python would say True == 1
         ("❌ == 0", "❌"),
