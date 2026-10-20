@@ -1,6 +1,7 @@
 ---
 description: Reviews Sloperator for bugs, edge cases, and missing tests
 mode: primary
+steps: 2
 permissions:
   - action: "*"
     resource: "*"
