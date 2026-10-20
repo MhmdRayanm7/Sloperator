@@ -122,6 +122,42 @@ hallucinate(n)✨"""
     assert run(source) == "105\n1\n"
 
 
+def test_loadbearing_declares_an_immutable_binding():
+    source = """loadbearing MAX = 3✨
+hallucinate(MAX)✨"""
+    assert run(source) == "3\n"
+
+
+def test_inner_block_can_shadow_a_loadbearing_binding():
+    source = """loadbearing MAX = 3✨
+vibe ✅ {
+    loadbearing MAX = 4✨
+    hallucinate(MAX)✨
+}
+hallucinate(MAX)✨"""
+    assert run(source) == "4\n3\n"
+
+
+def test_inner_block_can_shadow_a_loadbearing_binding_with_slop():
+    source = """loadbearing MAX = 3✨
+vibe ✅ {
+    slop MAX = 4✨
+    MAX = MAX + 1✨
+    hallucinate(MAX)✨
+}
+hallucinate(MAX)✨"""
+    assert run(source) == "5\n3\n"
+
+
+def test_loadbearing_can_bind_a_clanker():
+    source = """clanker add(a, b) {
+    ship a + b✨
+}
+loadbearing add_two = add✨
+hallucinate(add_two(20, 22))✨"""
+    assert run(source) == "42\n"
+
+
 def test_ship_unwinds_nested_blocks_and_loops():
     source = """clanker find() {
     slop i = 0✨

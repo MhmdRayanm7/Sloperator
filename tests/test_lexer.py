@@ -22,6 +22,10 @@ def test_keywords_operators_and_emoji():
     ]
 
 
+def test_loadbearing_is_a_keyword():
+    assert tokenize("loadbearing MAX = 3✨")[0].type is TokenType.LOADBEARING
+
+
 def test_two_character_operators_are_greedy():
     assert types("== != <= >= ||") == [
         TokenType.EQUAL_EQUAL,
