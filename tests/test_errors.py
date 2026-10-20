@@ -68,6 +68,7 @@ CASES = [
         2,
         "'right' is already declared in this scope",
     ),
+    ("hallucinate(1 / 0)✨", "runtime", 1, "division by zero"),
     ("vibe 1 {\n}", "runtime", 1, "vibe condition must be a boolean, got number"),
     (
         "clanker add(a, b) {\n    ship a + b✨\n}\nhallucinate(add(1))✨",

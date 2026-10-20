@@ -176,7 +176,7 @@ class Interpreter:
             case TokenType.STAR:
                 return left * right
             case TokenType.SLASH:
-                return self.divide(left, right)
+                return self.divide(left, right, operator)
             case TokenType.LESS:
                 return left < right
             case TokenType.LESS_EQUAL:
@@ -199,7 +199,9 @@ class Interpreter:
             f"got {type_name(left)} and {type_name(right)}",
         )
 
-    def divide(self, left: int, right: int) -> int:
+    def divide(self, left: int, right: int, operator: Token) -> int:
+        if right == 0:
+            raise SlopRuntimeError(operator.line, "division by zero")
         # SlopLang truncates toward zero; Python's // floors, which rounds
         # away from zero for negative quotients. Divide magnitudes and
         # reapply the sign so arbitrary-precision integers stay exact.
