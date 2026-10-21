@@ -59,6 +59,13 @@ def test_tab_escape_produces_an_actual_tab():
     assert tokenize("“name\\tscore”")[0].literal == "name\tscore"
 
 
+def test_comment_newline_advances_line_for_following_error():
+    with pytest.raises(LexicalError) as info:
+        tokenize("— a comment\n@")
+    assert info.value.line == 2
+    assert info.value.message == "unexpected character '@'"
+
+
 @pytest.mark.parametrize(
     ("source", "line", "message"),
     [
