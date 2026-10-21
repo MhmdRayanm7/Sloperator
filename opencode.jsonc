@@ -28,4 +28,14 @@
       "effect": "deny",
     },
   ],
+  "compaction": {
+    "auto": true,
+    "keep": {
+      "tokens": 10000,
+    },
+    "buffer": 20000,
+  },
+  "watcher": {
+    "ignore": ["logs/**"],
+  },
 }
