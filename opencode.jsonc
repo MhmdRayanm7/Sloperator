@@ -27,6 +27,11 @@
       "resource": "explore",
       "effect": "deny",
     },
+    {
+      "action": "read",
+      "resource": "*.env",
+      "effect": "deny",
+    },
   ],
   "compaction": {
     "auto": true,
