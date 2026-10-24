@@ -5,8 +5,7 @@ def test_unary_minus_rejects_booleans():
     result = run_source("hallucinate(-✅)✨")
     assert result.exit_code == 1
     assert result.stderr == (
-        "SlopLang runtime error at line 1: "
-        "operand of unary '-' must be a number, got boolean\n"
+        "SlopLang runtime error at line 1: operand of unary '-' must be a number, got boolean\n"
     )
 
 
