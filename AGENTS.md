@@ -22,6 +22,12 @@ uv run ruff check
 uv run ty check
 ```
 
+## Comparison tests
+
+```bash
+uv run pytest tests/test_comparisons.py
+```
+
 ## Regression tests
 
 Add a regression test when fixing a bug or changing SlopLang behavior. Put it in `tests/` and
