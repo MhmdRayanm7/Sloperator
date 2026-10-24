@@ -14,6 +14,7 @@ EXAMPLES = Path(__file__).resolve().parent.parent / "examples"
     [
         ("unary_not", "❌\n✅\n✅\n"),
         ("equality", "✅\n❌\n❌\n"),
+        ("short-circuit", "❌\n✅\n"),
     ],
 )
 def test_example_output(name: str, expected: str):
