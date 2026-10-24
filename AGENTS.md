@@ -22,6 +22,11 @@ uv run ruff check
 uv run ty check
 ```
 
+## Formatting
+
+After code changes, run `uv run ruff format .` to apply formatting, then verify with
+`uv run ruff format --check .`.
+
 ## Comparison tests
 
 ```bash
