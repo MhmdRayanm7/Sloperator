@@ -3,62 +3,232 @@
   "model": "opencode/deepseek-v4.1-flash-free",
   "permissions": [
     {
-      "action": "shell",
-      "resource": "bootdev run *",
-      "effect": "allow",
+      "action": "read",
+      "resource": "*.env",
+      "effect": "deny"
     },
     {
-      "action": "shell",
+      "action": "read",
       "resource": "*",
-      "effect": "ask",
+      "effect": "allow"
     },
     {
-      "action": "shell",
-      "resource": "bootdev run *",
-      "effect": "allow",
+      "action": "glob",
+      "resource": "*",
+      "effect": "allow"
+    },
+    {
+      "action": "grep",
+      "resource": "*",
+      "effect": "allow"
+    },
+    {
+      "action": "edit",
+      "resource": "*",
+      "effect": "allow"
+    },
+    {
+      "action": "write",
+      "resource": "*",
+      "effect": "allow"
+    },
+    {
+      "action": "patch",
+      "resource": "*",
+      "effect": "allow"
     },
     {
       "action": "run_slop",
       "resource": "*",
-      "effect": "allow",
+      "effect": "allow"
     },
     {
       "action": "subagent",
       "resource": "explore",
-      "effect": "deny",
-    },
-    {
-      "action": "read",
-      "resource": "*.env",
-      "effect": "deny",
+      "effect": "deny"
     },
     {
       "action": "skill",
       "resource": "create-test-program",
-      "effect": "ask",
+      "effect": "ask"
     },
+    {
+      "action": "shell",
+      "resource": "git push *--force*",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "git push *-f*",
+      "effect": "deny"
+    },
+    {
+      "action": "shell",
+      "resource": "bootdev run *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "bun *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "bunx *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "npm *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "playwright *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "node *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "uv run playground/server.py*",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "python playground/server.py*",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "python3 playground/server.py*",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "lsof *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "netstat *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "curl *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "Get-NetTCPConnection *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "uv run pytest*",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "uv run ruff*",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "uv run ty*",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "uv run *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "uv *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "pytest*",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "ruff *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "ty *",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "git status*",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "git diff*",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "git log*",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "git show*",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "git branch*",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "git remote*",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "git rev-parse*",
+      "effect": "allow"
+    },
+    {
+      "action": "shell",
+      "resource": "*",
+      "effect": "ask"
+    }
   ],
   "mcp": {
     "servers": {
       "context7": {
         "type": "remote",
-        "url": "https://mcp.context7.com/mcp",
+        "url": "https://mcp.context7.com/mcp"
       },
       "notion": {
         "type": "remote",
         "url": "https://mcp.notion.com/mcp",
-        "disabled": true,
-      },
-    },
+        "disabled": true
+      }
+    }
   },
   "compaction": {
     "auto": true,
     "keep": {
-      "tokens": 10000,
+      "tokens": 10000
     },
-    "buffer": 20000,
+    "buffer": 20000
   },
   "watcher": {
-    "ignore": ["logs/**"],
-  },
+    "ignore": ["logs/**"]
+  }
 }
