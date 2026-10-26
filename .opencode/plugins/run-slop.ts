@@ -50,7 +50,8 @@ export default Plugin.define({
         description:
           "Run a SlopLang program through the Sloperator interpreter and return its " +
           "stdout, stderr, and exit code as JSON. Call this tool directly instead of " +
-          "using Code Mode or a shell command.",
+          "using Code Mode or a shell command.\n\nUse this tool to run individual .slop " +
+          "examples when checking language behavior. Use the test suite for regression testing.",
         input: {
           type: "object",
           properties: {
