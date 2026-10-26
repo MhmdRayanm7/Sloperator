@@ -9,6 +9,9 @@ logs/
 # Playwright screenshots
 /screenshots/*
 
+# Playwright MCP browser data
+.playwright-mcp/
+
 # Keep responsive layout evidence
 !/screenshots/before-fix-375.png
 !/screenshots/after-fix-375.png
