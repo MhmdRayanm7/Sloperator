@@ -229,6 +229,16 @@
           "--browser",
           "chromium",
         ],
+        "disabled": true,
+      },
+      "chrome-devtools": {
+        "type": "local",
+        "command": [
+          "bunx",
+          "--bun",
+          "chrome-devtools-mcp@latest",
+          "--isolated",
+        ],
       }
     }
   },
