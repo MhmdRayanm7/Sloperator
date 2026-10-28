@@ -106,6 +106,13 @@ class Assign(Stmt):
 
 
 @dataclass(frozen=True)
+class CompoundAssign(Stmt):
+    name: Token
+    operator: Token
+    value: Expr
+
+
+@dataclass(frozen=True)
 class ExprStmt(Stmt):
     expression: Expr
 

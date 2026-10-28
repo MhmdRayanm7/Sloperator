@@ -5,6 +5,7 @@ from sloperator.parser.ast import (
     Binary,
     Block,
     Call,
+    CompoundAssign,
     Expr,
     ExprStmt,
     FunctionDecl,
@@ -91,7 +92,10 @@ class Parser:
             return self.ship_stmt()
         if self.check(TokenType.LEFT_BRACE):
             return self.block("expected '{'")
-        if self.check(TokenType.IDENTIFIER) and self.peek_next().type is TokenType.EQUAL:
+        if self.check(TokenType.IDENTIFIER) and self.peek_next().type in (
+            TokenType.EQUAL,
+            TokenType.PLUS_EQUAL,
+        ):
             return self.assign_stmt()
         expression = self.expression()
         self.terminator("expression")
@@ -118,11 +122,13 @@ class Parser:
         self.terminator("ship value")
         return Ship(keyword, value)
 
-    def assign_stmt(self) -> Assign:
+    def assign_stmt(self) -> Assign | CompoundAssign:
         name = self.advance()
         operator = self.advance()
         value = self.expression()
         self.terminator("assignment")
+        if operator.type is TokenType.PLUS_EQUAL:
+            return CompoundAssign(name, operator, value)
         return Assign(name, operator, value)
 
     def block(self, message: str) -> Block:
