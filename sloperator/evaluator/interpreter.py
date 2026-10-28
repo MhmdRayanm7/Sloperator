@@ -16,6 +16,7 @@ from sloperator.parser.ast import (
     Binary,
     Block,
     Call,
+    CompoundAssign,
     Expr,
     ExprStmt,
     FunctionDecl,
@@ -67,6 +68,11 @@ class Interpreter:
             case Assign(name, _, value_expr):
                 value = self.evaluate(value_expr)
                 self.environment.assign(name.lexeme, value, name.line)
+            case CompoundAssign(name, operator, value_expr):
+                value = self.evaluate(value_expr)
+                current = self.environment.get(name.lexeme, name.line)
+                updated = self.add(current, value, operator)
+                self.environment.assign(name.lexeme, updated, name.line)
             case ExprStmt(expression):
                 self.evaluate(expression)
             case If(condition, then_branch, else_branch):

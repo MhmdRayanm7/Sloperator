@@ -77,10 +77,12 @@ No implicit conversions.
 slop score = 10✨
 loadbearing LIMIT = 100✨
 score = score + 5✨
-score = score + 1✨
+score += 1✨
 ```
 
 Assignment is a statement, not an expression: `name = expression✨`. It updates the nearest existing mutable variable. Assigning to a `loadbearing` binding is a runtime error (`cannot assign to loadbearing '<name>'`). Reading or assigning an undefined name is a runtime error.
+
+Compound assignment is also a statement: `name += expression✨`. It evaluates the expression first, then adds it to the variable's current value using the same rules as `+` (numbers add, strings concatenate), and updates the nearest existing mutable variable.
 
 Every brace block is a lexical scope. Assignment searches the current scope, then each enclosing scope.
 
@@ -131,7 +133,7 @@ hallucinate()✨               — (blank line)
 
 ## Operators
 
-`+` adds numbers or concatenates strings. `-`, `*`, `/` accept only numbers; division truncates toward zero (`-7 / 2` is `-3`, not floor division's `-4`) and division by zero is a runtime error. `<`, `<=`, `>`, `>=` compare numbers. `==`, `!=` compare any values; different types are unequal, and functions are equal only to themselves. `&&` and `||` require booleans and short-circuit. Unary `-` negates a number and unary `!` negates a boolean.
+`+` adds numbers or concatenates strings. `-`, `*`, `/` accept only numbers; division truncates toward zero (`-7 / 2` is `-3`, not floor division's `-4`) and division by zero is a runtime error. The compound assignment `+=` uses the same rules as `+`. `<`, `<=`, `>`, `>=` compare numbers. `==`, `!=` compare any values; different types are unequal, and functions are equal only to themselves. `&&` and `||` require booleans and short-circuit. Unary `-` negates a number and unary `!` negates a boolean.
 
 Precedence, lowest to highest:
 
@@ -159,7 +161,7 @@ variableDecl   -> ( "slop" | "loadbearing" ) IDENTIFIER "=" expression "✨" ;
 
 statement      -> assignStmt | ifStmt | loopStmt | returnStmt
                 | block | expressionStmt ;
-assignStmt     -> IDENTIFIER "=" expression "✨" ;
+assignStmt     -> IDENTIFIER ( "=" | "+=" ) expression "✨" ;
 ifStmt         -> "vibe" expression block ( "nah" block )? ;
 loopStmt       -> "ralph" expression block ;
 returnStmt     -> "ship" expression "✨" ;
